@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วัสดุอุปกรณ์เเละประโยชน์</title>
+    <!-- นำเข้าฟอนต์ Sarabun เพื่อความสวยงามและอ่านง่าย -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* กำหนดธีมสีหลักและฟอนต์ */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f7f4; /* สีพื้นหลังขาวอมเขียวอ่อนๆ ดูสบายตา */
+            color: #2c3e2c; /* สีตัวอักษรเขียวเข้มเกือบดำ */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* เมนูแผงปุ่มกดด้านบน */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar button {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+            padding: 10px 20px;
+            margin: 0 5px;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .navbar button:hover {
+            background-color: #2e7d32;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.2);
+        }
+
+        /* จัดแต่งกล่องเนื้อหาหลัก */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border-top: 5px solid #4caf50; /* เส้นขอบบนสีเขียว */
+            position: relative;
+            z-index: 5;
+        }
+
+        /* หัวข้อหลัก */
+        h1 {
+            color: #1b5e20; /* สีเขียวเข้มสมุนไพร */
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* หัวข้อย่อย */
+        h2 {
+            color: #2e7d32;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* เพิ่มไอคอนใบไม้เล็กๆ หน้าหัวข้อ h2 */
+        h2::before {
+            content: "🌿 ";
+            font-size: 18px;
+        }
+
+        /* ข้อความทั่วไป */
+        p {
+            text-align: center;
+            color: #4f5d4f;
+            font-size: 16px;
+            max-width: 750px;
+            margin: 0 auto 15px auto;
+        }
+
+        /* ปรับแต่งรายการวัสดุอุปกรณ์ให้เรียงสวยงาม */
+        .equipment-list {
+            background-color: #f9fbf9;
+            border: 1px solid #e1ebe1;
+            border-radius: 12px;
+            padding: 25px 40px;
+            max-width: 500px;
+            margin: 20px auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+        }
+
+        .equipment-list li {
+            color: #37474f;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* บล็อกเน้นข้อความในส่วนประโยชน์ */
+        .benefit-card {
+            background-color: #f1f8e9;
+            border-left: 4px solid #81c784;
+            padding: 15px 20px;
+            margin: 15px auto;
+            border-radius: 0 8px 8px 0;
+            max-width: 750px;
+            text-align: left;
+        }
+
+        .benefit-card strong {
+            color: #1b5e20;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .benefit-card p {
+            text-align: left;
+            margin: 0;
+            font-size: 15px;
+            color: #4f5d4f;
+        }
+
+        /* --- เอฟเฟกต์ใบไม้ร่วงด้านข้างหน้าจอ (CSS Animation) --- */
+        .leaf-fall {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        /* กำหนดตำแหน่งความเร็วที่ต่างกันของใบไม้แต่ละใบ */
+        .leaf1 { left: 3%; animation-duration: 7s; delay: 0s; }
+        .leaf2 { left: 8%; animation-duration: 10s; animation-delay: 2s; font-size: 18px; }
+        .leaf3 { left: 12%; animation-duration: 6s; animation-delay: 4s; }
+        
+        .leaf4 { right: 3%; animation-duration: 8s; animation-delay: 1s; }
+        .leaf5 { right: 7%; animation-duration: 11s; animation-delay: 3s; font-size: 20px; }
+        .leaf6 { right: 13%; animation-duration: 7s; animation-delay: 5s; }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                top: 105vh;
+                transform: translateX(30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ใบไม้ร่วงด้านซ้ายและขวาของหน้าจอ -->
+    <div class="leaf-fall leaf1">🍃</div>
+    <div class="leaf-fall leaf2">🌱</div>
+    <div class="leaf-fall leaf3">🍃</div>
+    <div class="leaf-fall leaf4">🍃</div>
+    <div class="leaf-fall leaf5">🌿</div>
+    <div class="leaf-fall leaf6">🍃</div>
+
+    <!-- แถบเมนูปุ่มกดด้านบน -->
+    <div class="navbar">
+        <button onclick="document.location='index.html'">หน้าที่หนึ่ง</button>
+        <button onclick="document.location='index2.html'">หน้าที่สอง</button>
+        <button onclick="document.location='index3.html'">หน้าที่สาม</button>
+    </div>
+
+    <!-- กล่องเนื้อหา -->
+    <div class="container">
+        
+        <h1>วัสดุอุปกรณ์เเละประโยชน์</h1>
+
+        <h2>วัสดุอุปกรณ์</h2>
+        <div class="equipment-list">
+            <ol>
+                <li>เครื่องชั่งดิจิตอล</li>
+                <li>เครื่องปั่นละเอียด</li>
+                <li>ARLACEI 165</li>
+                <li>บีกเกอร์แก้ว</li>
+                <li>กระบอกตวง</li>
+                <li>เตาให้ความร้อน</li>
+                <li>แท่งแก้วคนสาร</li>
+                <li>น้ำสะอาด</li>
+                <li>2NA-EDTA</li>
+                <li>CYCLOPENTASILOXANE</li>
+                <li>สารสกัดจากใบพลูและหญ้าแห้วหมู</li>
+            </ol>
+        </div>
+
+        <h2>ประโยชน์</h2>
+        <p>การพัฒนาผลิตภัณฑ์ระงับกลิ่นกายจากสารสกัดใบพลูและหญ้าแห้วหมูด้วยวิธีสกัดแบบแช่หมัก (Maceration) เป็นการประยุกต์ใช้สมุนไพรพื้นบ้านเพื่อทดแทนสารเคมีสังเคราะห์ ช่วยยับยั้งแบคทีเรียต้นเหตุของกลิ่นตัว กระชับรูขุมขน และลดการสะสมของเหงื่ออย่างปลอดภัยโดยไม่ก่อให้เกิดการระคายเคืองต่อผิวหนัง</p>
+
+        <h2>ประโยชน์ต่อสุขภาพและสิ่งแวดล้อม</h2>
+
+        <div class="benefit-card">
+            <strong>🔒 ปลอดภัยไร้สารเคมี</strong>
+            <p>อ่อนโยนต่อผิว ลดความเสี่ยงในการเกิดอาการแพ้ หรือการสะสมของสารเคมีจำพวกอะลูมิเนียมคลอไรด์</p>
+        </div>
+
+        <div class="benefit-card">
+            <strong>🌱 ใช้ประโยชน์จากธรรมชาติ</strong>
+            <p>เป็นการต่อยอดภูมิปัญญาไทย นำพืชสมุนไพรในท้องถิ่นมาใช้ให้เกิดมูลค่าทางเศรษฐกิจ</p>
+        </div>
+
+        <div class="benefit-card">
+            <strong>♻️ ย่อยสลายได้ตามธรรมชาติ</strong>
+            <p>เป็นมิตรต่อสิ่งแวดล้อม ลดมลพิษจากขยะสารเคมีสังเคราะห์</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

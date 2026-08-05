@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การนำไปประยุกต์ใช้เเละเเนวคิดการพัฒนาผลิตภัณฑ์</title>
+    <!-- นำเข้าฟอนต์ Sarabun เพื่อความสวยงามและอ่านง่าย -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* กำหนดธีมสีหลักและฟอนต์ */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f7f4; /* สีพื้นหลังขาวอมเขียวอ่อนๆ ดูสบายตา */
+            color: #2c3e2c; /* สีตัวอักษรเขียวเข้มเกือบดำ */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* เมนูแผงปุ่มกดด้านบน */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar button {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+            padding: 10px 20px;
+            margin: 0 5px;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .navbar button:hover {
+            background-color: #2e7d32;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.2);
+        }
+
+        /* จัดแต่งกล่องเนื้อหาหลัก */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border-top: 5px solid #4caf50; /* เส้นขอบบนสีเขียว */
+            position: relative;
+            z-index: 5;
+        }
+
+        /* หัวข้อหลัก */
+        h1 {
+            color: #1b5e20; /* สีเขียวเข้มสมุนไพร */
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* หัวข้อย่อย */
+        h2 {
+            color: #2e7d32;
+            font-size: 20px;
+            text-align: left;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e8f5e9;
+            font-weight: 600;
+        }
+
+        /* หัวข้อแนวทางภาพรวม */
+        .overview-title {
+            text-align: center;
+            border: none;
+            color: #1b5e20;
+            font-size: 22px;
+        }
+        .overview-title::before {
+            content: "✨ ";
+        }
+
+        /* ข้อความทั่วไป */
+        p {
+            color: #4f5d4f;
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        /* บล็อกภาพรวมความคิด */
+        .overview-card {
+            background-color: #e8f5e9;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.08);
+        }
+        .overview-card p {
+            text-align: center;
+            margin: 0;
+            font-size: 16px;
+            color: #1b5e20;
+            font-weight: 500;
+        }
+
+        /* ตกแต่งเนื้อหาย่อยให้อ่านง่าย */
+        .detail-item {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #81c784;
+        }
+        .detail-item strong {
+            color: #2e7d32;
+            font-size: 16px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        /* เน้นคำสำคัญ */
+        .highlight {
+            color: #2e7d32;
+            font-weight: 600;
+            background-color: #f1f8e9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* --- เอฟเฟกต์ใบไม้ร่วงด้านข้างหน้าจอ (CSS Animation) --- */
+        .leaf-fall {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        /* กำหนดตำแหน่งความเร็วที่ต่างกันของใบไม้แต่ละใบ */
+        .leaf1 { left: 3%; animation-duration: 7s; delay: 0s; }
+        .leaf2 { left: 8%; animation-duration: 10s; animation-delay: 2s; font-size: 18px; }
+        .leaf3 { left: 12%; animation-duration: 6s; animation-delay: 4s; }
+        
+        .leaf4 { right: 3%; animation-duration: 8s; animation-delay: 1s; }
+        .leaf5 { right: 7%; animation-duration: 11s; animation-delay: 3s; font-size: 20px; }
+        .leaf6 { right: 13%; animation-duration: 7s; animation-delay: 5s; }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                top: 105vh;
+                transform: translateX(30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ใบไม้ร่วงด้านซ้ายและขวาของหน้าจอ -->
+    <div class="leaf-fall leaf1">🍃</div>
+    <div class="leaf-fall leaf2">🌱</div>
+    <div class="leaf-fall leaf3">🍃</div>
+    <div class="leaf-fall leaf4">🍃</div>
+    <div class="leaf-fall leaf5">🌿</div>
+    <div class="leaf-fall leaf6">🍃</div>
+
+    <!-- แถบเมนูปุ่มกดด้านบน -->
+    <div class="navbar">
+        <button onclick="document.location='index.html'">หน้าที่หนึ่ง</button>
+        <button onclick="document.location='index2.html'">หน้าที่สอง</button>
+        <button onclick="document.location='index3.html'">หน้าที่สาม</button>
+    </div>
+
+    <!-- กล่องเนื้อหา -->
+    <div class="container">
+        
+        <h1>การนำไปประยุกต์ใช้เเละเเนวคิดการพัฒนาผลิตภัณฑ์</h1>
+
+        <h2 class="overview-title">เเนวทางการต่อยอดของผลิตภัณฑ์</h2>
+        <div class="overview-card">
+            <p>มุ่งเน้นการใช้สารธรรมชาติ (สารประกอบฟีนอลิกและน้ำมันหอมระเหย) เพื่อยับยั้งแบคทีเรียและดูดซับกลิ่น การต่อยอดในอนาคตสามารถพัฒนาสูตรให้คงตัวด้วย นาโนเทคโนโลยี ขยายผลสู่ การวิจัยเชิงคลินิก (Clinical Trial) และยกระดับเป็น สินค้าออร์แกนิก (Organic) เพื่อเพิ่มมูลค่าเชิงพาณิชย์</p>
+        </div>
+
+        <h2>1. การพัฒนาสูตรและเนื้อสัมผัส (Formulation Upgrades)</h2>
+        <div class="detail-item">
+            <strong>📦 รูปแบบผลิตภัณฑ์:</strong> 
+            <p>จากเดิมอาจเป็นเนื้อน้ำ (Spray/Roll-on) สามารถต่อยอดเป็นเนื้อเจลใส (Gel), ครีมเนื้อบางเบา (Cream) หรือสติ๊ก (Stick) เพื่อความสะดวกในการใช้งาน</p>
+        </div>
+        <div class="detail-item">
+            <strong>👕 ลดการทิ้งคราบเหลือง:</strong> 
+            <p>พัฒนาสารสกัดให้ใสบริสุทธิ์เพื่อแก้ปัญหาคราบเหลืองบนเสื้อผ้า</p>
+        </div>
+        <div class="detail-item">
+            <strong>💧 เพิ่มคุณค่าการบำรุง:</strong> 
+            <p>เติมสารสกัดจากธรรมชาติ เช่น ว่านหางจระเข้ หรือสารสกัดแตงกวา เพื่อเพิ่มความชุ่มชื้นและลดการระคายเคืองผิวบริเวณใต้วงแขน</p>
+        </div>
+
+        <h2>2. การยกระดับประสิทธิภาพด้วยเทคโนโลยี (Advanced Technology)</h2>
+        <div class="detail-item">
+            <strong>🔬 นาโนเทคโนโลยี (Nanotechnology):</strong> 
+            <p>นำสารสกัดหญ้าแห้วหมูและใบพลูมาทำเป็น Nano-emulsion หรือ Nano-capsules ช่วยให้สารออกฤทธิ์แทรกซึมเข้าสู่ผิวได้ดีขึ้นและควบคุมการปลดปล่อยสารระงับกลิ่นกายให้ยาวนานตลอดวัน</p>
+        </div>
+        <div class="detail-item">
+            <strong>🧪 การทดสอบทางคลินิก (Clinical Trials):</strong> 
+            <p>ส่งทดสอบประสิทธิภาพทางวิทยาศาสตร์กับอาสาสมัครใน สถาบันวิจัยวิทยาศาสตร์และเทคโนโลยีแห่งประเทศไทย (วว.) เพื่อรับรองผลการทดสอบการระคายเคือง (Dermatologically Tested) สร้างความมั่นใจให้ผู้บริโภค</p>
+        </div>
+
+        <h2>3. การพัฒนาสู่เชิงพาณิชย์และมาตรฐานรับรอง (Commercial & Certification)</h2>
+        <div class="detail-item">
+            <strong>✅ มาตรฐานผลิตภัณฑ์:</strong> 
+            <p>ยกระดับห้องปฏิบัติการให้ได้มาตรฐาน GMP/ISO และขอการรับรองจาก สำนักงานคณะกรรมการอาหารและยา (อย.)</p>
+        </div>
+        <div class="detail-item">
+            <strong>🌱 ผลิตภัณฑ์ออร์แกนิก (Organic Care):</strong> 
+            <p>ขอใบรับรองมาตรฐานออร์แกนิก (เช่น USDA Organic หรือ Ecocert) สำหรับวัตถุดิบที่ใช้ เพื่อเจาะตลาดกลุ่มพรีเมียม (Premium Market)</p>
+        </div>
+        <div class="detail-item">
+            <strong>♻️ บรรจุภัณฑ์รักษ์โลก (Eco-friendly Packaging):</strong> 
+            <p>เปลี่ยนบรรจุภัณฑ์เป็นพลาสติกย่อยสลายได้ หรือใช้วัสดุรีไซเคิล (PCR) เพื่อตอบโจทย์เทรนด์ ESG (Environmental, Social, and Governance)</p>
+        </div>
+
+        <h2>4. การขยายสายผลิตภัณฑ์ (Line Extension)</h2>
+        <div class="detail-item">
+            <strong>เดอร์มาโทโลจี (Sensitive Skin):</strong> 
+            <p>พัฒนาสูตรที่ปราศจากแอลกอฮอล์ (Alcohol-free), น้ำหอม (Fragrance-free) และสารพาราเบน (Paraben-free)</p>
+        </div>
+        <div class="detail-item">
+            <strong>🦶 ผลิตภัณฑ์ดูแลจุดอื่นๆ:</strong> 
+            <p>นำสารสกัดที่มีฤทธิ์ยับยั้งเชื้อราและแบคทีเรียได้ดีไปพัฒนาเป็นสเปรย์ระงับกลิ่นเท้า (Foot Spray) หรือแป้งระงับกลิ่นเท้า</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
